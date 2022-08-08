@@ -2,34 +2,34 @@ from collections import deque
 
 n,m=map(int,input().split())
 
-g=[]
+array=[]
 for i in range(n):
-    g.append(list(map(int,input())))
+    array.append(list(map(int,input())))
 #상,하,좌,우
 a=[0,0,-1,1] #열
 b=[-1,1,0,0] #행
-c=4
+count=4
 
 
 def bfs(x,y):
-    q=deque() #양방향
-    q.append((x,y))
+    queue=deque() #양방향
+    queue.append((x,y))
 
 
-    while q:
-        x,y=q.popleft()
-        for i in range(c):
-            ax=x+a[i]
-            by=y+b[i]
-            if ax<0 or ax>=n or by<0 or by>=m:
+    while queue:
+        x,y=queue.popleft()
+        for i in range(count):
+            xa=x+a[i]
+            yb=y+b[i]
+            if xa<0 or xa>=n or yb<0 or yb>=m:
                 continue
-            if g[ax][by] == 0:
+            if array[xa][yb] == 0:
                 continue
-            if g[ax][by] == 1:
-                g[ax][by]=g[x][y]+1
-                q.append((ax,by))
+            if array[xa][yb] == 1:
+                array[xa][yb]=array[x][y]+1
+                queue.append((xa,yb))
 
-    return g[n-1][m-1]
+    return array[n-1][m-1]
 
 print(bfs(0,0))
 
